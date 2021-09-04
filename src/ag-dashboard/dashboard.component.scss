@@ -1,0 +1,66 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 auto;
+  height: 100%;
+}
+
+.header {
+  background-color: gray;
+  color: aqua;
+  padding: 15px;
+  font-size: xx-large;
+  font-family: "Avantgarde", "TeX Gyre Adventor", "URW Gothic L", sans-serif;
+}
+
+.navigation {
+  display: flex;
+  flex: 0 0 auto;
+  overflow: hidden;
+  background-color: #333;
+
+  &.links {
+    justify-content: flex-start;
+  }
+
+  &.footer {
+    justify-content: flex-end;
+  }
+
+  a {
+    color: aqua;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+
+  a:hover {
+    background-color: gray;
+    color: aqua;
+  }
+}
+
+.placeholder {
+  display: flex;
+  flex-direction: row;
+  flex: 1 0 auto;
+  padding: 15px;
+  border: 1.5px dashed orange;
+  margin: 15px;
+}
+
+.column {
+  border: 1.5px dashed red;
+  margin: 15px;
+  flex: 0 1 50%;
+  display: flex;
+  flex-direction: column;
+
+  p {
+    padding: 30px;
+  }
+
+  .graph {
+    flex: 1 0 auto;
+  }
+}
