@@ -18,10 +18,12 @@
     "@angular/platform-browser": "~12.2.0",
     "@angular/platform-browser-dynamic": "~12.2.0",
     "@angular/router": "~12.2.0",
+    "katex": "^0.13.18",
+    "mathjax3": "^3.0.0-beta.4",
     "rxjs": "~6.6.0",
     "tslib": "^2.3.0",
-    "vis-network": "^9.1.0",
     "vis-data": "^7.1.2",
+    "vis-network": "^9.1.0",
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
@@ -29,6 +31,8 @@
     "@angular/cli": "~12.2.3",
     "@angular/compiler-cli": "~12.2.0",
     "@types/jasmine": "~3.8.0",
+    "@types/katex": "^0.11.1",
+    "@types/mathjax": "^0.0.37",
     "@types/node": "^12.11.1",
     "angular-cli-ghpages": "^1.0.0-rc.2",
     "jasmine-core": "~3.8.0",
