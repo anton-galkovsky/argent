@@ -6,7 +6,11 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "lint": "npm run lint:scss",
+    "lint:html": "linthtml \"src/**/*.html\"",
+    "lint:scss": "stylelint \"src/**/*.scss\"",
+    "format": "prettier --write \"**/*.{js,scss,json,yaml,yml,md}\""
   },
   "private": true,
   "dependencies": {
@@ -30,17 +34,30 @@
     "@angular-devkit/build-angular": "~12.2.3",
     "@angular/cli": "~12.2.3",
     "@angular/compiler-cli": "~12.2.0",
+    "@linthtml/linthtml": "0.2.7",
     "@types/jasmine": "~3.8.0",
     "@types/katex": "^0.11.1",
     "@types/mathjax": "^0.0.37",
     "@types/node": "^12.11.1",
+    "@yandex-lms-ext/prettier-config": "1.0.2",
+    "@yandex-lms-ext/stylelint-config": "1.0.2",
     "angular-cli-ghpages": "^1.0.0-rc.2",
+    "husky": "3.0.5",
     "jasmine-core": "~3.8.0",
     "karma": "~6.3.0",
     "karma-chrome-launcher": "~3.1.0",
     "karma-coverage": "~2.0.3",
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "~1.7.0",
+    "lint-staged": "9.3.0",
+    "prettier": "1.18.2",
+    "stylelint": "11.0.0",
+    "stylelint-config-prettier": "^9.0.3",
     "typescript": "~4.3.5"
+  },
+  "husky": {
+    "hooks": {
+      "pre-push": "npm run lint"
+    }
   }
 }
