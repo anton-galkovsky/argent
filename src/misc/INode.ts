@@ -3,4 +3,6 @@ export interface INode {
   label?: string,
   shape?: 'image',
   image?: string,
+  color?: string,
+  hiddenLabel?: string,
 }

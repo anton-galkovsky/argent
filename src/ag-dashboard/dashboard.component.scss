@@ -10,8 +10,18 @@ header {
 
   background-color: gray;
   color: aqua;
+  cursor: default;
   font-family: "Comfortaa", cursive;
   font-size: 2em;
+
+  span {
+    float: right;
+
+    padding: 0.2em 0 0 0;
+
+    font-size: 0.7em;
+    opacity: 0.5;
+  }
 }
 
 .links {
@@ -55,7 +65,9 @@ footer {
 .placeholder {
   position: fixed;
   top: calc(4em + 2.9em);
+  right: 0;
   bottom: 2.85em;
+  left: 0;
 }
 
 .graph-container {
@@ -82,4 +94,12 @@ footer {
   min-width: 1px;
   height: 100%;
   padding: 1em;
+
+  .tex {
+    font-size: 5vh;
+  }
+
+  .separator {
+    color: darkslategray;
+  }
 }
