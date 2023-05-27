@@ -155,7 +155,7 @@ export class DashboardComponent implements AfterViewInit {
     }
     this.networkInstance.on("click", onClickWrapper);
 
-    setTimeout(() => this.edgesDataset.update([{id: 'trigger_redrawing'}]), 1000);
+    // setTimeout(() => this.edgesDataset.update([{id: 'trigger_redrawing'}]), 1000);
   }
 }
 
