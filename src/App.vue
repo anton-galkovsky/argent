@@ -26,7 +26,7 @@ import { macros } from './assets/katex-macros'
 //   NodeChosenNodeFunction
 // } from "vis-network/declarations/network/Network";
 
-const render = (s: string) => renderToString.renderToString(s, { output: 'mathml', macros })
+const renderKatex = (s: string) => renderToString.renderToString(s, { output: 'mathml', macros })
 
 const Colors = {
   defaultNode: { border: '#406897', background: '#BACFFF' },
@@ -61,9 +61,9 @@ onMounted(() => {
   const tex1 = '\\huge \\text{Happy birthday!}'
   const tex2 = '\\large \\text{Congratulations!}'
   const tex3 = '\\text{By the way, } e ^ {i \\pi} + 1 = 0 \\small \\text{\\qquad ©katex}'
-  const strKatex1 = render(tex1) + '</br>'
-  const strKatex2 = render(tex2) + '</br>'
-  const strKatex3 = render(tex3) + '</br>'
+  const strKatex1 = renderKatex(tex1) + '</br>'
+  const strKatex2 = renderKatex(tex2) + '</br>'
+  const strKatex3 = renderKatex(tex3) + '</br>'
   katexDiv.insertAdjacentHTML('beforeend', strKatex1)
   katexDiv.insertAdjacentHTML('beforeend', strKatex2)
   katexDiv.insertAdjacentHTML('beforeend', strKatex3)
@@ -223,22 +223,11 @@ function onClick(params: any) {
     const label_text = allNodes[selectedNodeId].hiddenLabel.replaceAll('\n', ' ')
     if (selectedNodeId in graphData.articles) {
       // @ts-ignore                                            TODO: fix it
-      const text_lines = graphData.articles[selectedNodeId]
+      const text_lines: string[] = graphData.articles[selectedNodeId]
       node_description_p.innerText = ''
       for (let text_line of text_lines) {
-        let tex_occurrence_start = text_line.indexOf('$(')
-        let tex_occurrence_end = text_line.indexOf(')$')
-        while (tex_occurrence_start != -1 && tex_occurrence_end != -1) {
-          const strKatex = render(text_line.substring(tex_occurrence_start + 2, tex_occurrence_end))
-          text_line =
-            text_line.substring(0, tex_occurrence_start) +
-            strKatex +
-            text_line.substring(tex_occurrence_end + 2)
-          tex_occurrence_start = text_line.indexOf('$(')
-          tex_occurrence_end = text_line.indexOf(')$')
-          // console.log(tex_occurrence, text_line)
-        }
-        // console.log(tex_occurrence = text_line.match(TEX_REGEXP))
+        text_line = text_line.replaceAll(/`(.*?)`/g, (_, s) => renderKatex(s))
+        text_line = text_line.replaceAll('--', '&mdash;')
 
         node_description_p.innerHTML += text_line + '</br>'
       }
@@ -249,7 +238,7 @@ function onClick(params: any) {
     const katexDiv = katexDivRef.value
     const tex = allNodes[selectedNodeId].hiddenLabel
     if (tex.includes('\\')) {
-      const strKatex = render(tex) + '</br>'
+      const strKatex = renderKatex(tex) + '</br>'
       katexDiv.innerText = ''
       katexDiv.insertAdjacentHTML('beforeend', strKatex)
     } else {
@@ -262,7 +251,7 @@ function onClick(params: any) {
     }
     const katexDiv = katexDivRef.value
     const tex = 'e ^ {i \\pi} + 1 = 0 \\small \\text{\\qquad ©katex}'
-    const strKatex = render(tex) + '</br>'
+    const strKatex = renderKatex(tex) + '</br>'
     katexDiv.innerText = ''
     katexDiv.insertAdjacentHTML('beforeend', strKatex)
   }
