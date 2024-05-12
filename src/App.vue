@@ -18,12 +18,15 @@ import { MathJax } from 'mathjax3/mathjax3/mathjax.js'
 import { INode } from './misc/INode'
 import { IEdge } from './misc/IEdge'
 import { graphData } from './assets/graph-data'
+import { macros } from './assets/katex-macros'
 // import {
 //   ChosenNodeValues,
 //   IdType,
 //   NodeChosenLabelFunction,
 //   NodeChosenNodeFunction
 // } from "vis-network/declarations/network/Network";
+
+const render = (s: string) => renderToString.renderToString(s, { output: 'mathml', macros })
 
 const Colors = {
   defaultNode: { border: '#406897', background: '#BACFFF' },
@@ -58,9 +61,9 @@ onMounted(() => {
   const tex1 = '\\huge \\text{Happy birthday!}'
   const tex2 = '\\large \\text{Congratulations!}'
   const tex3 = '\\text{By the way, } e ^ {i \\pi} + 1 = 0 \\small \\text{\\qquad ©katex}'
-  const strKatex1 = renderToString.renderToString(tex1, { output: 'mathml' }) + '</br>'
-  const strKatex2 = renderToString.renderToString(tex2, { output: 'mathml' }) + '</br>'
-  const strKatex3 = renderToString.renderToString(tex3, { output: 'mathml' }) + '</br>'
+  const strKatex1 = render(tex1) + '</br>'
+  const strKatex2 = render(tex2) + '</br>'
+  const strKatex3 = render(tex3) + '</br>'
   katexDiv.insertAdjacentHTML('beforeend', strKatex1)
   katexDiv.insertAdjacentHTML('beforeend', strKatex2)
   katexDiv.insertAdjacentHTML('beforeend', strKatex3)
@@ -226,10 +229,7 @@ function onClick(params: any) {
         let tex_occurrence_start = text_line.indexOf('$(')
         let tex_occurrence_end = text_line.indexOf(')$')
         while (tex_occurrence_start != -1 && tex_occurrence_end != -1) {
-          const strKatex = renderToString.renderToString(
-            text_line.substring(tex_occurrence_start + 2, tex_occurrence_end),
-            { output: 'mathml' }
-          )
+          const strKatex = render(text_line.substring(tex_occurrence_start + 2, tex_occurrence_end))
           text_line =
             text_line.substring(0, tex_occurrence_start) +
             strKatex +
@@ -249,7 +249,7 @@ function onClick(params: any) {
     const katexDiv = katexDivRef.value
     const tex = allNodes[selectedNodeId].hiddenLabel
     if (tex.includes('\\')) {
-      const strKatex = renderToString.renderToString(tex, { output: 'mathml' }) + '</br>'
+      const strKatex = render(tex) + '</br>'
       katexDiv.innerText = ''
       katexDiv.insertAdjacentHTML('beforeend', strKatex)
     } else {
@@ -262,7 +262,7 @@ function onClick(params: any) {
     }
     const katexDiv = katexDivRef.value
     const tex = 'e ^ {i \\pi} + 1 = 0 \\small \\text{\\qquad ©katex}'
-    const strKatex = renderToString.renderToString(tex, { output: 'mathml' }) + '</br>'
+    const strKatex = render(tex) + '</br>'
     katexDiv.innerText = ''
     katexDiv.insertAdjacentHTML('beforeend', strKatex)
   }
