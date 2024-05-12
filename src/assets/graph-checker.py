@@ -41,7 +41,7 @@ def not_transitive(g):
 
 
 if __name__ == "__main__":
-    with open('graph-data.json') as f:
+    with open('graph-data.ts') as f:
         graph_json = json.load(f)
         graph = defaultdict(list)
         for edge in graph_json["edges"]:

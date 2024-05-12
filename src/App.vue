@@ -17,7 +17,7 @@ import { MathJax } from 'mathjax3/mathjax3/mathjax.js'
 
 import { INode } from './misc/INode'
 import { IEdge } from './misc/IEdge'
-import graphData from './assets/graph-data.json'
+import { graphData } from './assets/graph-data'
 // import {
 //   ChosenNodeValues,
 //   IdType,
@@ -243,7 +243,8 @@ function onClick(params: any) {
         node_description_p.innerHTML += text_line + '</br>'
       }
     } else {
-      node_description_p.innerText = 'We can also change the description block: ' + label_text
+      node_description_p.innerText = '...'
+      // node_description_p.innerText = 'We can also change the description block: ' + label_text
     }
     const katexDiv = katexDivRef.value
     const tex = allNodes[selectedNodeId].hiddenLabel
