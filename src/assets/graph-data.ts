@@ -23,10 +23,14 @@ export const graphData = {
     //
     { id: 'set-intersect', label: 'Пересечение\nмножеств' },
     { id: 'cart-product',  label: 'Декартово\nпроизведение' },
+    { id: 'inductive-set', label: 'Индуктивные\nмножества' },
+    { id: 'transit-set',   label: 'Транзитивное\nмножество' },
     //
     { id: 'set-algebra',   label: 'Алгебра\nмножеств' },
     { id: 'relations',     label: 'Отношения' },
     { id: 'set-partition', label: 'Разбиение\nмножества' },
+    { id: 'infinity-ax',   label: 'Аксиома\nбесконечности' },
+    { id: 'natural-num',   label: 'Натуральное\nчисло' },
     //
     { id: 'functions',     label: 'Функции' },
     { id: 'injective-rel', label: 'Инъективные\nотношения' },
@@ -35,6 +39,8 @@ export const graphData = {
     { id: 'rel-image',     label: 'Образ\nотношения' },
     { id: 'rel-restrict',  label: 'Сужение\nотношения' },
     { id: 'rel-kinds',     label: 'Типы отношений' },
+    { id: 'nat-num-set',   label: 'Множество\nнатуральных чисел' },
+    { id: 'pred-union',    label: 'Объединение элементов\nпоследователя' },
     //
     { id: 'all-funcs-set', label: 'Множество\nвсех функций' },
     { id: 'rel-inv-props', label: 'Свойства обратных\nотношений' },
@@ -43,15 +49,22 @@ export const graphData = {
     { id: 'rel-comp-inv',  label: 'Обратное\nк композиции' },
     { id: 'equiv-rel',     label: 'Отношение\nэквивалентности' },
     { id: 'linear-order',  label: 'Линейный\nпорядок' },
+    { id: 'set-cl-und-f',  label: 'Замкнутость\nотносительно функции' },
+    { id: 'induc-princip', label: 'Принцип\nматематической индукции' },
+    { id: 'nat-num-trans', label: 'Натуральные числа\nтранзитивны' },
     //
     { id: 'inf-cart-prod', label: 'Бесконечное\nпрямое произведение' },
     { id: 'comp-with-inv', label: 'Композиция функции\nс обратным' },
     { id: 'image-props',   label: 'Образ\nи операции' },
     { id: 'equiv-class',   label: 'Класс\nэквивалентности' },
+    { id: 'peano-systems', label: 'Системы\nПеано' },
+    { id: 'no-zero-pred',  label: 'Отсутствие\nпредшественника нуля' },
+    { id: 'omega-transit', label: 'ω транзитивна' },
     //
     { id: 'choice-ax-2',   label: 'Аксиома\nвыбора II' },
     { id: 'th-inv-func',   label: 'Существование\nобратной функции' },
     { id: 'quotient-set',  label: 'Фактормножество' },
+    { id: 'omega-is-p-s',  label: 'ω является\nсистемой Пеано' },
     //
     { id: 'func-quotient', label: 'Действие функций\nна классы эквивалентности' },
   ],
@@ -94,7 +107,20 @@ export const graphData = {
     { from: 'linear-order',  to: ['rel-kinds'] },
     { from: 'equiv-class',   to: ['equiv-rel'] },
     { from: 'quotient-set',  to: ['equiv-class', 'set-partition'] },
-    { from: 'func-quotient', to: ['quotient-set'] },
+    { from: 'func-quotient', to: ['quotient-set', 'functions'] },
+    { from: 'inductive-set', to: ['nothing-ax', 'set-union-ax'] },
+    { from: 'infinity-ax',   to: ['inductive-set'] },
+    { from: 'natural-num',   to: ['inductive-set'] },
+    { from: 'nat-num-set',   to: ['infinity-ax', 'natural-num'] },
+    { from: 'set-cl-und-f',  to: ['functions', 'rel-image'] },
+    { from: 'induc-princip', to: ['nat-num-set'] },
+    { from: 'no-zero-pred',  to: ['induc-princip'] },
+    { from: 'peano-systems', to: ['set-cl-und-f'] },
+    { from: 'transit-set',   to: ['set-union-ax'] },
+    { from: 'pred-union',    to: ['inductive-set', 'transit-set'] },
+    { from: 'nat-num-trans', to: ['pred-union', 'natural-num'] },
+    { from: 'omega-is-p-s',  to: ['peano-systems', 'no-zero-pred', 'nat-num-trans'] },
+    { from: 'omega-transit', to: ['transit-set', 'induc-princip'] },
   ],
   articles: {
     'logic-elem': [
@@ -423,6 +449,59 @@ export const graphData = {
       '<b>Теорема.</b> Пусть `R` -- линейный порядок на `A`, тогда:',
       '1) `\\nexists x: xRx`',
       '2) `\\forall x,y: x \\neq y \\rightarrow xRy \\oplus yRx`',
+    ],
+    'inductive-set': [
+      '`a^+ \\coloneqq a \\cup \\{a\\}` -- последователь `a`.',
+      '`A` -- индуктивное множество, если `\\varnothing \\in A \\land a^+ \\in A \\forall a \\in A`.',
+    ],
+    'infinity-ax': [
+      '`\\exists A: \\varnothing \\in A \\land a^+ \\in A \\forall a \\in A`.',
+    ],
+    'natural-num': [
+      '`a` -- натуральное число, если `a \\in A \\forall A \\text{ -- inductive}`.',
+      '',
+      '`\\mathbb{0} \\coloneqq \\varnothing`',
+      '`\\mathbb{1} \\coloneqq \\{\\mathbb{0}\\} = \\{\\varnothing\\} = \\varnothing^+`',
+      '`\\mathbb{2} \\coloneqq \\{\\mathbb{1}, \\mathbb{0}\\} = \\{\\{\\varnothing\\}, \\varnothing\\} = \\varnothing^{++}`',
+      '`\\mathbb{3} \\coloneqq \\{\\mathbb{2}, \\mathbb{1}, \\mathbb{0}\\} = \\{\\{\\{\\varnothing\\}, \\varnothing\\}, \\{\\varnothing\\}, \\varnothing\\} = \\varnothing^{+++}`',
+      '`...`',
+    ],
+    'nat-num-set': [
+      '<b>Теорема.</b> Множество натуральных чисел `\\omega` существует.',
+      '',
+      '<b>Теорема.</b> `\\omega` -- индуктивное множество и является подмножеством любого другого индуктивного множества.',
+    ],
+    'induc-princip': [
+      '<b>Теорема.</b> `\\forall A \\text{ -- inductive} \\quad A \\subset \\omega \\rightarrow A = \\omega`.',
+    ],
+    'no-zero-pred': [
+      '<b>Теорема.</b> `\\forall a \\in \\omega \\quad a \\neq 0 \\rightarrow \\exists p \\in \\omega: a = p^+`.',
+    ],
+    'set-cl-und-f': [
+      'Пусть `S` -- функция и `A \\subset \\op{dom} S`, тогда `A` -- замкнуто относительно `S`, если `S[A] \\subset A`.',
+    ],
+    'peano-systems': [
+      '`\\langle N,S,e \\rangle` -- система Пеано, если `S: N \\rightarrow N`, `e \\in N` и:',
+      '1) `e \\notin \\op{ran} S`',
+      '2) `S \\text{ -- injective}`',
+      '3) `\\forall A \\subset N \\quad e \\in S \\land S \\text{ -- closed under } S \\rightarrow S = N`',
+    ],
+    'omega-is-p-s': [
+      '`\\sigma \\coloneqq \\{\\langle n, n^+ \\rangle \\mid n \\in \\omega \\}`.',
+      '',
+      '<b>Теорема.</b> `\\langle \\omega, \\sigma, 0 \\rangle` -- система Пеано.',
+    ],
+    'transit-set': [
+      '`A` -- транзитивное множество, если `\\bigcup A \\subset A`.',
+    ],
+    'pred-union': [
+      '<b>Теорема.</b> Пусть `a` -- транзитивное множество, тогда `\\bigcup (a^+) = a`.',
+    ],
+    'nat-num-trans': [
+      '<b>Теорема.</b> Каждое натуральное число является транзитивным множеством.',
+    ],
+    'omega-transit': [
+      '<b>Теорема.</b> `\\omega` является транзитивным множеством.',
     ],
   }
 }
