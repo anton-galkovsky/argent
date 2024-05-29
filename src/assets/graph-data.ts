@@ -51,7 +51,6 @@ export const graphData = {
     { id: 'linear-order',  label: 'Линейный\nпорядок' },
     { id: 'set-cl-und-f',  label: 'Замкнутость\nотносительно функции' },
     { id: 'induc-princip', label: 'Принцип\nматематической индукции' },
-    { id: 'nat-num-trans', label: 'Натуральные числа\nтранзитивны' },
     //
     { id: 'inf-cart-prod', label: 'Бесконечное\nпрямое произведение' },
     { id: 'comp-with-inv', label: 'Композиция функции\nс обратным' },
@@ -59,6 +58,7 @@ export const graphData = {
     { id: 'equiv-class',   label: 'Класс\nэквивалентности' },
     { id: 'peano-systems', label: 'Системы\nПеано' },
     { id: 'no-zero-pred',  label: 'Отсутствие\nпредшественника нуля' },
+    { id: 'nat-num-trans', label: 'Натуральное число\nтранзитивно' },
     { id: 'omega-transit', label: 'ω транзитивна' },
     //
     { id: 'choice-ax-2',   label: 'Аксиома\nвыбора II' },
@@ -118,7 +118,7 @@ export const graphData = {
     { from: 'peano-systems', to: ['set-cl-und-f'] },
     { from: 'transit-set',   to: ['set-union-ax'] },
     { from: 'pred-union',    to: ['inductive-set', 'transit-set'] },
-    { from: 'nat-num-trans', to: ['pred-union', 'natural-num'] },
+    { from: 'nat-num-trans', to: ['pred-union', 'induc-princip'] },
     { from: 'omega-is-p-s',  to: ['peano-systems', 'no-zero-pred', 'nat-num-trans'] },
     { from: 'omega-transit', to: ['transit-set', 'induc-princip'] },
   ],
