@@ -65,8 +65,10 @@ export const graphData = {
     { id: 'th-inv-func',   label: 'Существование\nобратной функции' },
     { id: 'quotient-set',  label: 'Фактормножество' },
     { id: 'omega-is-p-s',  label: 'ω является\nсистемой Пеано' },
+    { id: 'reqursion-th',  label: 'Теорема\nо рекурсии' },
     //
     { id: 'func-quotient', label: 'Действие функций\nна классы эквивалентности' },
+    { id: 'p-s-iso-omega', label: 'Системы Пеано\nизоморфны ω' },
   ],
   edges: [
     { from: 'set-in',        to: ['logic-elem'] },
@@ -115,12 +117,14 @@ export const graphData = {
     { from: 'set-cl-und-f',  to: ['functions', 'rel-image'] },
     { from: 'induc-princip', to: ['nat-num-set'] },
     { from: 'no-zero-pred',  to: ['induc-princip'] },
-    { from: 'peano-systems', to: ['set-cl-und-f'] },
+    { from: 'peano-systems', to: ['injective-rel', 'set-cl-und-f'] },
     { from: 'transit-set',   to: ['set-union-ax'] },
     { from: 'pred-union',    to: ['inductive-set', 'transit-set'] },
     { from: 'nat-num-trans', to: ['pred-union', 'induc-princip'] },
     { from: 'omega-is-p-s',  to: ['peano-systems', 'no-zero-pred', 'nat-num-trans'] },
     { from: 'omega-transit', to: ['transit-set', 'induc-princip'] },
+    { from: 'reqursion-th',  to: ['all-funcs-set', 'nat-num-trans'] },
+    { from: 'p-s-iso-omega', to: ['reqursion-th', 'no-zero-pred', 'peano-systems'] },
   ],
   articles: {
     'logic-elem': [
@@ -502,6 +506,17 @@ export const graphData = {
     ],
     'omega-transit': [
       '<b>Теорема.</b> `\\omega` является транзитивным множеством.',
+    ],
+    'reqursion-th': [
+      '<b>Теорема.</b> Пусть `a \\in A` и `F: A \\rightarrow A`, тогда `\\exists !h: \\omega \\rightarrow A`, такая что:',
+      '1) `h(0) = a`',
+      '2) `h(n^+) = F(h(n)) \\quad \\forall n \\in \\omega`'
+    ],
+    'p-s-iso-omega': [
+      '<b>Теорема.</b> Пусть `\\langle N, S, e \\rangle` -- система Пеано, тогда `\\langle N, S, e \\rangle \\cong \\langle \\omega, \\sigma, 0 \\rangle`, то есть:',
+      '`\\exists h: \\omega \\rightarrow N \\text{ -- injective, surjective}`, такая что:',
+      '1) `h(0) = e`',
+      '2) `h(\\sigma(n)) = S(h(n)) \\quad \\forall n \\in \\omega`'
     ],
   }
 }
