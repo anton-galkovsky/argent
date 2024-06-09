@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "esModuleInterop": true,
     "resolveJsonModule": true,
     "baseUrl": ".",
     "module": "esnext",
@@ -8,6 +9,9 @@
     "paths": {
       "@/*": ["./src/*"]
     }
+  },
+  "ts-node": {
+    "esm": true
   },
   "exclude": ["node_modules", "dist"]
 }
